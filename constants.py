@@ -5,4 +5,5 @@ default_sleep_time = 5
 default_timeout = 200
 default_subject = "AB"
 default_prompts_file = "prompts.txt"
+default_folder_to_watch = "C:\\DDrive\\Tools\\ComfyUI_windows_portable\\ComfyUI\\output"
 

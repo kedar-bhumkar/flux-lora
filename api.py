@@ -6,7 +6,7 @@ from monitor import monitor_directory
 import argparse
 from workflow_api import workflow
 from util import getCharacter, getPrompts
-from constants import default_batch_size, default_subject, default_prompts_file
+from constants import default_batch_size, default_subject, default_prompts_file, default_folder_to_watch
 
 def queue_prompt(prompt):
     p = {"prompt": prompt}
@@ -30,7 +30,7 @@ def replace_text(text, subject, config):
     return text
 
 def main():
-    folder_to_watch = "C:\\DDrive\\Tools\\ComfyUI_windows_portable_nvidia\\ComfyUI_windows_portable\\ComfyUI\\output"
+    folder_to_watch = default_folder_to_watch
     parser = argparse.ArgumentParser(description="Run flux on any character.")
     parser.add_argument("--ch", type=str, required=True, help="the base character")
    
@@ -48,9 +48,9 @@ def main():
                 prompt = initialize_prompt(text, subject)                
                 print(f"Processing prompt {counter+1} of {total_prompts} : {text}")
                 text = ""
-                #queue_prompt(prompt)                           
+                queue_prompt(prompt)                           
                 #wait till process is complete. Since the request is non-blocking we need to monitor the folder or wait until the timeout.                
-                #monitor_directory(folder_to_watch)
+                monitor_directory(folder_to_watch)
             else:
                 print("Skipping empty prompt")
     print("All prompts processed.")
